@@ -1,0 +1,19 @@
+{
+    "name": "carloss/activos_cursos_app",
+    "description": "crus",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Models\\": "models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Carlos Santaella",
+            "email": "carlos.santaella.cs@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}

@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^$ /controllers/home.php [L]
+RewriteRule ^login$ /controllers/login.php [L]
