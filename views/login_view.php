@@ -13,7 +13,7 @@
     <main>
         <div class="container">
             <form action="" method="post" class="row form-login" id="formLogin">
-                <h3 class="text-center text-success">Login</h3>
+                <h3 class="text-center text-primary">Login</h3>
                 <div class="col-12 mb-3">
                     <label for="">Usuario</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese usuario..." name="username">
@@ -26,7 +26,7 @@
 
                 </div>
                 <div class="col-12 text-center mb-3">
-                    <button type="button" class="btn btn-success btn-submit">Acceder</button>
+                    <button type="button" class="btn btn-primary btn-submit">Acceder</button>
                 </div>
                 <div class="col-12 text-center">
                     <a href="/registro">¿No tienes cuenta?</a>
@@ -56,7 +56,7 @@
                     var formLogin = document.getElementById('formLogin');
                     formData = new FormData(formLogin);
 
-                    const rawResponse = await fetch('/login', {
+                    const rawResponse = await fetch('/actions/login', {
                         method: 'POST',
                         body: formData
                     });
