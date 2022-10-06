@@ -18,3 +18,6 @@ RewriteRule ^actions/rules/get_list$ /controllers/actions/rules/get_list.php [L]
 RewriteRule ^actions/rules/create$ /controllers/actions/rules/create.php [L]
 RewriteRule ^actions/rules/delete$ /controllers/actions/rules/delete.php [L]
 RewriteRule ^actions/rules/update$ /controllers/actions/rules/update.php [L]
+
+# -- Configuration
+RewriteRule ^actions/configuration/update$ /controllers/actions/configuration/update.php [L]

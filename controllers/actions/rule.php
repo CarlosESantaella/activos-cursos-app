@@ -27,10 +27,8 @@
             // Verify permissions
             if (Auth::has_permission("admin")) {
                 $rule_m = new RuleModel;
-    
                 $title = $_POST["title"];
                 $description = $_POST["description"];
-    
                 $rule_m->create($title, $description);
                 HttpStatusCode::response(201, null); return;
             }
@@ -42,11 +40,9 @@
             // Verify permissions
             if (Auth::has_permission("admin")) {
                 $rule_m = new RuleModel;
-    
                 $id_rule = $_POST["id_rule"];
                 $title = $_POST["title"];
                 $description = $_POST["description"];
-
                 if (!$rule_m->get($id_rule)) {
                     HttpStatusCode::raiseException(404, "Rule not found"); return;
                 }else {
@@ -63,9 +59,7 @@
             // Verify permissions
             if (Auth::has_permission("admin")) {
                 $rule_m = new RuleModel;
-
                 $id_rule = $_POST["id_rule"];
-
                 $rule_m->delete($id_rule);
                 HttpStatusCode::response(204, null); return;
             }

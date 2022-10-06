@@ -26,6 +26,16 @@ class Configuration {
         }
     }
 
+    public function update($user_limit){
+        try{
+            $stmt = $this->conn->prepare("UPDATE configuration SET user_limit = :user_limit WHERE id = 1");
+            $stmt->bindParam(':user_limit', $user_limit);
+            $stmt->execute();
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
 }
 
 ?>
