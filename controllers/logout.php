@@ -7,9 +7,4 @@
     $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
     $dotenv->load();
 
-    if (isset($_COOKIE["access_token"])) {
-        $user_global = Auth::me($_COOKIE["access_token"]);
-        if ($user_global) header("location:/");
-    }
-
-    include($_SERVER['DOCUMENT_ROOT'].'/views/register_view.php');
+    Auth::logout();

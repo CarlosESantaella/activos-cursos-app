@@ -5,6 +5,7 @@ RewriteRule ^$ /controllers/home.php [L]
 RewriteRule ^login$ /controllers/login_view.php [L]
 RewriteRule ^registro$ /controllers/register_view.php [L]
 RewriteRule ^dashboard$ /controllers/dashboard_view.php [L]
+RewriteRule ^logout$ /controllers/logout.php [L]
 
 # Actions
 
@@ -17,3 +18,6 @@ RewriteRule ^actions/rules/get_list$ /controllers/actions/rules/get_list.php [L]
 RewriteRule ^actions/rules/create$ /controllers/actions/rules/create.php [L]
 RewriteRule ^actions/rules/delete$ /controllers/actions/rules/delete.php [L]
 RewriteRule ^actions/rules/update$ /controllers/actions/rules/update.php [L]
+
+# -- Configuration
+RewriteRule ^actions/configuration/update$ /controllers/actions/configuration/update.php [L]
