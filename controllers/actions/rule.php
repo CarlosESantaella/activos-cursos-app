@@ -2,28 +2,26 @@
     namespace Controller;
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/models/Rule.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/auth.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
 
-    use Model\User as UserModel;
-    use Model\Configuration;
+    use Model\Rule as RuleModel;
+    use Controller\Auth;
     use Controller\HttpStatusCode;
 
     class Rule {
 
         public static function create() {
-            $user = new UserModel;
-            $configuration = new Configuration;
 
-            $full_name = $_POST["full_name"];
-            $username = $_POST["username"];
-            $password = $_POST["password"];
+            // Verify permissions
+            Auth::has_permission("admin");
 
-            $user_found = $user->get_user_by_username($username);
-            if ($user_found) {
-                HttpStatusCode::raiseException(409, "Username already registered"); return;
-            }
-            $conf = $configuration->get_setups();
-            $user->create($full_name, $username, $password, $conf["user_limit"]);
+            $rule_m = new RuleModel;
+
+            $title = $_POST["title"];
+            $description = $_POST["description"];
+
+            $rule_m->create($title, $description);
             HttpStatusCode::response(201, null); return;
         }
 

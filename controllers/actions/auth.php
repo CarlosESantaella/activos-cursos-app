@@ -24,7 +24,10 @@
             if ($user_found["password"] == strval($password)) {
                 $access_token = Auth::generate_access_token($user_found);
                 setcookie("access_token", $access_token, 0, '/');
-                $response = ['access_token' => Auth::generate_access_token($user_found)];
+                $response = [
+                    'access_token' => Auth::generate_access_token($user_found),
+                    'type' => $user_found["type"]
+                ];
                 HttpStatusCode::response(200, $response); return;
             }else {
                 HttpStatusCode::raiseException(401, "Wrong username or password"); return;
@@ -56,6 +59,20 @@
                 setcookie("access_token", false, -1, '/');
                 return false;
             }
+        }
+
+        public static function has_permission($permission) {
+            if (isset($_SERVER["HTTP_AUTHORIZATION"]) || isset($_COOKIE["access_token"])) {
+                $access_token = isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : $_COOKIE["access_token"];
+                $token =  isset($_SERVER["HTTP_AUTHORIZATION"]) ? explode(" ", $access_token)[1] : $access_token;
+                $me = Auth::me($token);
+                 if ($me) {
+                    if ($me->type == $permission) {
+                        return True;
+                    }
+                }
+            }
+            HttpStatusCode::raiseException(401, "You do not have permissions"); return;
         }
 
     }
