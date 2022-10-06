@@ -11,18 +11,30 @@
 
     class Rule {
 
+        public static function get_list() {
+
+            // Verify permissions
+            if (Auth::has_permission("admin")) {
+                $rule_m = new RuleModel;    
+                $list = $rule_m->get_list();
+                HttpStatusCode::response(200, $list); return;
+            }
+
+        }
+
         public static function create() {
 
             // Verify permissions
-            Auth::has_permission("admin");
+            if (Auth::has_permission("admin")) {
+                $rule_m = new RuleModel;
+    
+                $title = $_POST["title"];
+                $description = $_POST["description"];
+    
+                $rule_m->create($title, $description);
+                HttpStatusCode::response(201, null); return;
+            }
 
-            $rule_m = new RuleModel;
-
-            $title = $_POST["title"];
-            $description = $_POST["description"];
-
-            $rule_m->create($title, $description);
-            HttpStatusCode::response(201, null); return;
         }
 
     }

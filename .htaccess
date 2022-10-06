@@ -7,5 +7,11 @@ RewriteRule ^registro$ /controllers/register_view.php [L]
 RewriteRule ^dashboard$ /controllers/dashboard_view.php [L]
 
 # Actions
-RewriteRule ^actions/login$ /controllers/actions/login.php [L]
-RewriteRule ^actions/register$ /controllers/actions/register.php [L]
+
+# -- Auth
+RewriteRule ^actions/auth/login$ /controllers/actions/auth/login.php [L]
+RewriteRule ^actions/auth/register$ /controllers/actions/auth/register.php [L]
+
+# -- Rules
+RewriteRule ^actions/rules/get_list$ /controllers/actions/rules/get_list.php [L]
+RewriteRule ^actions/rules/create$ /controllers/actions/rules/create.php [L]
