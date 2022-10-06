@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label for="">Contraseña</label>
-                    <input type="text" class="form-control validate-empty" placeholder="Ingrese contraseña..." name="password">
+                    <input type="password" class="form-control validate-empty" placeholder="Ingrese contraseña..." name="password">
                     <div class="msg-error text-danger"></div>
 
                 </div>
@@ -35,7 +35,8 @@
         </div>
     </main>
 
-
+    <div class="alert" role="alert">
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
@@ -56,20 +57,37 @@
                     var formLogin = document.getElementById('formLogin');
                     formData = new FormData(formLogin);
 
-                    const rawResponse = await fetch('/actions/login', {
+                    const rawResponse = await fetch('/actions/auth/login', {
                         method: 'POST',
                         body: formData
                     });
                     const content = await rawResponse.json();
-                    console.log(content);
+                    
                     if (rawResponse.status == 200) {
-                        console.log('login exitoso');
+                        if(content.type == 'user'){
+                            
+                            window.location.href = "/";
+                        }else if(content.type == 'client'){
+                            window.location.href = "/";
+                            
+                        }else if(content.type == 'admin'){
+                            window.location.href = "/dashboard";
+
+                        }
                     }else {
                         // $('.alert-register-error').slideDown();
                         // setTimeout(() => {
                         //     $('.alert-register-error').slideUp();
                         // }, 3000);
-                        console.log('error login');
+                        $('.alert').removeClass('alert-primary');
+                        $('.alert').removeClass('alert-danger');
+                        $('.alert').addClass('alert-danger');
+                        $('.alert').text('Usuario o contraseña incorrecto');
+                        $('.alert').slideDown();
+                        setTimeout(() => {
+                            $('.alert').slideUp();
+                        }, 3000);
+                        
                     }
                 }
 

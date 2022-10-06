@@ -4,4 +4,5 @@
     $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
     $dotenv->load();
 
+    
     include($_SERVER['DOCUMENT_ROOT'].'/views/login_view.php');
