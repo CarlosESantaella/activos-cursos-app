@@ -36,7 +36,7 @@
 
         public static function logout() {
             setcookie("access_token", false, -1, '/');
-            header('location: /');
+            header('location: /login');
         }
 
         public static function me($access_token) {
