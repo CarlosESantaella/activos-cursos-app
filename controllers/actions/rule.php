@@ -61,7 +61,7 @@
                 $rule_m = new RuleModel;
                 $id_rule = $_POST["id_rule"];
                 $rule_m->delete($id_rule);
-                HttpStatusCode::response(204, null); return;
+                HttpStatusCode::response(201, null); return;
             }
 
         }

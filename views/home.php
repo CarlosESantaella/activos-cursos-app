@@ -18,6 +18,25 @@
     </style>
 </head>
 <body>
+    <!-- Ver Norma Modal -->
+    <div class="modal fade" id="verNormaModal" tabindex="-1" aria-labelledby="verNormaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="verNormaModalLabel">Norma</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+        </div>
+    </div>
+    </div>
+
     <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
     <h2 class="text-primary text-center pt-4">Dashboard Cliente</h2>
 
@@ -32,10 +51,10 @@
 
     </section>
     <section class="box">
-        <h3 class="text-center mb-4">Normas crud</h3>
-        <div class="text-end">
+        <h3 class="text-center mb-4">Normas</h3>
+        <!-- <div class="text-end">
             <button class="btn btn-primary btn-create">Agregar</button>
-        </div>
+        </div> -->
         <table id="normas">
             <thead>
                 <tr>
@@ -92,8 +111,10 @@
                             <td>${content[key].title}</td>
                             <td>${content[key].description}</td>
                             <td>
-                                <button class="btn btn-primary me-1 btn-edit" title="Editar" data-id="${content[key].id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="btn btn-danger" title="Eliminar" data-id="${content[key].id}"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-success me-1 btn-see" title="Ver norma" data-id="${content[key].id}" data-bs-toggle="modal" data-bs-target="#verNormaModal">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                
                             </td>
 
                         </tr>
@@ -115,7 +136,24 @@
                     $('.input-search').parent().next().text('Este campo es obligatorio');
                 }else{
                     $('.input-search').parent().next().text('');
+                    let formData = new FormData();
+                    formData.append('title', title);
 
+                    const rawResponse = await fetch('/actions/rules/update', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const content = await rawResponse.json();
+
+                    // $('.alert').removeClass('alert-primary');
+                    // $('.alert').removeClass('alert-danger');
+                    // $('.alert').addClass('alert-success');
+                    // $('.alert').text('Busqueda realizada correctamente');
+                    // $('.alert').slideDown();
+                    // setTimeout(() => {
+                    //     $('.alert').slideUp();
+                    // }, 3000);
                 }
             })
 
@@ -151,24 +189,45 @@
                 ]
             });
 
-            $('.btn-create').on('click', function(){
-                window.location.href = "/dashboard#box3";
-                $('.box3-title').text('Crear Norma');
-                $('.box3').fadeIn();
+            // $('.btn-create').on('click', function(){
+            //     window.location.href = "/dashboard#box3";
+            //     $('.box3-title').text('Crear Norma');
+            //     $('.box3').fadeIn();
 
-                $('.box3-btn').attr('data-action', 'create');
+            //     $('.box3-btn').attr('data-action', 'create');
+            // });
+            $('body').on('click', '.btn-see', async function(){
+                let rule_id = $(this).attr('data-id');
+
+                let formData = new FormData();
+                    formData.append('id_rule', rule_id);
+
+                    const rawResponse = await fetch('/actions/rules/get', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const content = await rawResponse.json();
+
+                    $('#verNormaModal .modal-dialog .modal-body').html('');
+                    $('#verNormaModal .modal-dialog .modal-body').html(content.description);
+                    $('#verNormaModalLabel').html('Norma: '+content.title);
+
+
+
+
             });
-            $('body').on('click', '.btn-edit', function(){
-                $('.box3-title').text('Editar Norma');
-                let id = $(this).attr('data-id');
+            // $('body').on('click', '.btn-edit', function(){
+                //     $('.box3-title').text('Editar Norma');
+            //     let id = $(this).attr('data-id');
 
-                window.location.href = "/dashboard#box3";
-                $('.box3').fadeIn();
+            //     window.location.href = "/dashboard#box3";
+            //     $('.box3').fadeIn();
 
-                $('.box3-btn').attr('data-action', 'edit');
-                $('.box3-btn').attr('data-id', id);
+            //     $('.box3-btn').attr('data-action', 'edit');
+            //     $('.box3-btn').attr('data-id', id);
 
-            });
+            // });
             $('body').on('click', '.box3-btn', async function(){
                 let action = $(this).attr('data-action');
                 let id = $(this).attr('data-id');

@@ -93,7 +93,7 @@
                             <td>${content[key].description}</td>
                             <td>
                                 <button class="btn btn-primary me-1 btn-edit" title="Editar" data-id="${content[key].id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="btn btn-danger" title="Eliminar" data-id="${content[key].id}"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-danger btn-delete" title="Eliminar" data-id="${content[key].id}"><i class="fa-solid fa-trash"></i></button>
                             </td>
 
                         </tr>
@@ -193,6 +193,29 @@
                 $('.box3-btn').attr('data-id', id);
 
             });
+            $('body').on('click', '.btn-delete', async function(){
+                let id = $(this).attr('data-id');
+                let formData = new FormData();
+                formData.append('id_rule', id);
+
+                const rawResponse = await fetch('/actions/rules/delete', {
+                    method: 'POST',
+                    body: formData
+                });
+                const content = await rawResponse.json();
+                $('.alert').removeClass('alert-primary');
+                $('.alert').removeClass('alert-danger');
+                $('.alert').addClass('alert-success');
+                $('.alert').text('Norma eliminada correctamente');
+                $('.alert').slideDown();
+                setTimeout(() => {
+                    $('.alert').slideUp();
+                }, 3000);
+
+                $('#normas').DataTable().destroy();
+                $('#normas tbody').html('');
+                init();
+            })
             $('body').on('click', '.box3-btn', async function(){
                 let action = $(this).attr('data-action');
                 let id = $(this).attr('data-id');

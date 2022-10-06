@@ -18,7 +18,7 @@
                 $configuration_m = new ConfigurationModel;
                 $limit_user = $_POST["limit_user"];
                 $configuration_m->update($limit_user);
-                HttpStatusCode::response(204, null); return;
+                HttpStatusCode::response(201, null); return;
             }
 
         }
