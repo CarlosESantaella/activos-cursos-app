@@ -2,7 +2,7 @@
     namespace Controller;
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/models/User.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/httpstatuscode.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 
     use \Firebase\JWT\JWT;
@@ -12,15 +12,6 @@
 
     class Auth {
 
-        public static function auth() {
-            global $user_logged;
-            if ($user_logged) {
-                header("location:/");
-            }else {
-                require_once("views/auth.php");
-            }
-        }
-
         public static function login() {
             $user = new User;
             $username = $_POST["username"];
@@ -28,16 +19,15 @@
 
             $user_found = $user->get_user_by_username($username);
             if (!$user_found) {
-                HttpStatusCode::raiseException(401, "User not found");
-                return;
+                HttpStatusCode::raiseException(401, "Wrong username or password"); return;
             }
             if ($user_found["password"] == strval($password)) {
                 $access_token = Auth::generate_access_token($user_found);
                 setcookie("access_token", $access_token, 0, '/');
-                $response = ['access_token' => Auth::generate_access_token($user_found), 'user' => $user_found];
+                $response = ['access_token' => Auth::generate_access_token($user_found)];
                 HttpStatusCode::response(200, $response); return;
             }else {
-                HttpStatusCode::raiseException(401, "Incorrect password"); return;
+                HttpStatusCode::raiseException(401, "Wrong username or password"); return;
             }
         }
 

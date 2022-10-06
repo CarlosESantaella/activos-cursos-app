@@ -1,5 +1,13 @@
 RewriteEngine On
+
+# Views
 RewriteRule ^$ /controllers/home.php [L]
 RewriteRule ^login$ /controllers/login_view.php [L]
 RewriteRule ^registro$ /controllers/register_view.php [L]
+<<<<<<< HEAD
 RewriteRule ^dashboard$ /controllers/dashboard_view.php [L]
+=======
+
+# Actions
+RewriteRule ^actions/login$ /controllers/actions/login.php [L]
+>>>>>>> 3e931ff60d33da0afde41f74a562b5e480df4cdf
