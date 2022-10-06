@@ -17,19 +17,19 @@
                 <div class="col-12 mb-3">
                     <label for="">Nombre</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese Nombre..." name="full_name">
-                    <div class="msg-error text-danger"></div>
+                    <p class="msg-error text-danger"></p>
 
                 </div>
                 <div class="col-12 mb-3">
                     <label for="">Usuario</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese usuario..." name="username">
-                    <div class="msg-error text-danger"></div>
+                    <p class="msg-error text-danger"></p>
 
                 </div>
                 <div class="col-12 mb-3">
                     <label for="">Contraseña</label>
                     <input type="password" class="form-control validate-empty" placeholder="Ingrese contraseña..." name="password">
-                    <div class="msg-error text-danger"></div>
+                    <p class="msg-error text-danger"></p>
 
                 </div>
                 <div class="col-12 text-center mb-3">

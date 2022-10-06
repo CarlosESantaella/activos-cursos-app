@@ -51,7 +51,7 @@
                     HttpStatusCode::raiseException(404, "Rule not found"); return;
                 }else {
                     $rule_m->update($title, $description, $id_rule);
-                    HttpStatusCode::response(204, null); return;
+                    HttpStatusCode::response(201, null); return;
                 }
 
             }
