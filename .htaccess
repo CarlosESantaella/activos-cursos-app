@@ -1,4 +1,9 @@
 RewriteEngine On
+
+# Views
 RewriteRule ^$ /controllers/home.php [L]
 RewriteRule ^login$ /controllers/login_view.php [L]
 RewriteRule ^registro$ /controllers/register_view.php [L]
+
+# Actions
+RewriteRule ^actions/login$ /controllers/actions/login.php [L]
