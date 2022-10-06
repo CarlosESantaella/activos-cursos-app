@@ -1,0 +1,17 @@
+/* general */
+body{
+    background: #f2f3f4;
+}
+/* general */
+/* LOGIN REGISTER */
+.form-login, .form-register{
+    width: 95%;
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, .1);
+    margin-top: 2rem;
+}
+/* LOGIN REGISTER*/
