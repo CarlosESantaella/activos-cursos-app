@@ -45,8 +45,6 @@
             $created = date("Y-m-d H:i:s");
             $data['iat'] = strtotime($created);
             $data['exp'] = strtotime(TOKEN_EXPIRATION_TIME ,strtotime($created));
-            $perms = stripslashes(html_entity_decode($data['permissions']));
-            $data['permissions'] = json_decode($perms,true);
             unset($data['password']);
             return JWT::encode($data, CLIENT_SECRET, JWT_ALGORITHM);
         }
