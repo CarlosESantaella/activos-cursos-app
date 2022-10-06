@@ -1,0 +1,6 @@
+<?php
+
+    // AUTH JWT
+    define('JWT_ALGORITHM', 'HS256');
+    define('CLIENT_SECRET', 'I0XxdDyM4pYHCqwk1ieEx_moumYU3FK4eBmVuVYAn1NG-LTFa8x0WOAUcFoeVuKGbaGi1FWT9I35NmW2UNyJnRLP9gWa0lblHOUHCoFvWbfuK62VcHb2A7AKCV92kI1WncF9BtmO');
+    define('TOKEN_EXPIRATION_TIME', '+30 years');

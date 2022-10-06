@@ -10,16 +10,15 @@ class User {
     private $conn;
 
     public function __construct(){
-        require_once('Connection.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'/models/Connection.php');
         $this->conn = Connect::connection();
     }
 
-    public function get_user_by_auth($user, $password) {
+    public function get_user_by_username($username){
         try{
-            $query = "SELECT * FROM users WHERE user = :user AND password = :password";
+            $query = "SELECT * FROM users WHERE user = :user";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(':user', $user);
-            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':user', $username);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user;
