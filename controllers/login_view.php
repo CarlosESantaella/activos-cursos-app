@@ -11,5 +11,5 @@
         $user_global = Auth::me($_COOKIE["access_token"]);
         if ($user_global) header("location:/");
     }
-
+    
     include($_SERVER['DOCUMENT_ROOT'].'/views/login_view.php');

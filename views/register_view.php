@@ -16,24 +16,24 @@
                 <h3 class="text-center text-primary">Registro</h3>
                 <div class="col-12 mb-3">
                     <label for="">Nombre</label>
-                    <input type="text" class="form-control validate-empty" placeholder="Ingrese Nombre...">
+                    <input type="text" class="form-control validate-empty" placeholder="Ingrese Nombre..." name="full_name">
                     <div class="msg-error text-danger"></div>
 
                 </div>
                 <div class="col-12 mb-3">
                     <label for="">Usuario</label>
-                    <input type="text" class="form-control validate-empty" placeholder="Ingrese usuario...">
+                    <input type="text" class="form-control validate-empty" placeholder="Ingrese usuario..." name="username">
                     <div class="msg-error text-danger"></div>
 
                 </div>
                 <div class="col-12 mb-3">
                     <label for="">Contraseña</label>
-                    <input type="text" class="form-control validate-empty" placeholder="Ingrese contraseña...">
+                    <input type="password" class="form-control validate-empty" placeholder="Ingrese contraseña..." name="password">
                     <div class="msg-error text-danger"></div>
 
                 </div>
                 <div class="col-12 text-center mb-3">
-                    <button class="btn btn-primary btn-submit">Registrarse</button>
+                    <button type="button" class="btn btn-primary btn-submit">Registrarse</button>
                 </div>
                 <div class="col-12 text-center">
                     <a href="/login">¿Ya tienes cuenta?</a>
@@ -42,9 +42,10 @@
         </div>
     </main>
 
-    <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
+    <div class="alert " role="alert">
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    
     <script>
         $(document).ready(function(){
             $('.btn-submit').on('click', async function(){
@@ -64,20 +65,30 @@
                     var formRegister = document.getElementById('formRegister');
                     formData = new FormData(formRegister);
 
-                    const rawResponse = await fetch('/login', {
+                    const rawResponse = await fetch('/actions/auth/register', {
                         method: 'POST',
                         body: formData
                     });
                     const content = await rawResponse.json();
                     console.log(content);
-                    if (rawResponse.status == 200) {
-                        console.log('login exitoso');
+                    if (rawResponse.status == 201) {
+                        $('.alert').removeClass('alert-primary');
+                        $('.alert').removeClass('alert-danger');
+                        $('.alert').addClass('alert-success');
+                        $('.alert').text('Usted se ha registrado correctamente, ya puede loguearse');
+                        $('.alert').slideDown();
+                        setTimeout(() => {
+                            $('.alert').slideUp();
+                        }, 3000);
                     }else {
-                        // $('.alert-register-error').slideDown();
-                        // setTimeout(() => {
-                        //     $('.alert-register-error').slideUp();
-                        // }, 3000);
-                        console.log('error login');
+                        $('.alert').removeClass('alert-primary');
+                        $('.alert').removeClass('alert-danger');
+                        $('.alert').addClass('alert-danger');
+                        $('.alert').text('Error al registrar, intente nuevamente');
+                        $('.alert').slideDown();
+                        setTimeout(() => {
+                            $('.alert').slideUp();
+                        }, 3000);
                     }
                 }
 
