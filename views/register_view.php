@@ -13,7 +13,7 @@
     <main>
         <div class="container">
             <form action="" method="post" class="row form-register" id="formRegister">
-                <h3 class="text-center text-success">Registro</h3>
+                <h3 class="text-center text-primary">Registro</h3>
                 <div class="col-12 mb-3">
                     <label for="">Nombre</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese Nombre...">
@@ -33,7 +33,7 @@
 
                 </div>
                 <div class="col-12 text-center mb-3">
-                    <button class="btn btn-success btn-submit">Registrarse</button>
+                    <button class="btn btn-primary btn-submit">Registrarse</button>
                 </div>
                 <div class="col-12 text-center">
                     <a href="/login">¿Ya tienes cuenta?</a>
