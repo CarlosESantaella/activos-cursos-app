@@ -14,6 +14,18 @@ class Rule {
         $this->conn = Connect::connection();
     }
 
+    public function get($id){
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM rules WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $rule = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $rule;
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
     public function get_list(){
         try{
             $stmt = $this->conn->prepare("SELECT * FROM rules");
@@ -30,8 +42,29 @@ class Rule {
             $stmt = $this->conn->prepare("INSERT INTO rules (title, description) VALUES (:title, :description)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
-            $rule = $stmt->execute();
-            return $rule;
+            $stmt->execute();
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
+    public function update($title, $description, $id_rule){
+        try{
+            $stmt = $this->conn->prepare("UPDATE rules SET title = :title, description = :description WHERE id = :id");
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':id', $id_rule);
+            $stmt->execute();
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
+    public function delete($id){
+        try{
+            $stmt = $this->conn->prepare("DELETE FROM rules WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
         }catch(PDOException $e){
             die('error: '.$e->getMessage().' on '.$e->getLine());
         }

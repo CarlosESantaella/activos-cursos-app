@@ -37,4 +37,39 @@
 
         }
 
+        public static function update() {
+
+            // Verify permissions
+            if (Auth::has_permission("admin")) {
+                $rule_m = new RuleModel;
+    
+                $id_rule = $_POST["id_rule"];
+                $title = $_POST["title"];
+                $description = $_POST["description"];
+
+                if (!$rule_m->get($id_rule)) {
+                    HttpStatusCode::raiseException(404, "Rule not found"); return;
+                }else {
+                    $rule_m->update($title, $description, $id_rule);
+                    HttpStatusCode::response(204, null); return;
+                }
+
+            }
+
+        }
+
+        public static function delete() {
+
+            // Verify permissions
+            if (Auth::has_permission("admin")) {
+                $rule_m = new RuleModel;
+
+                $id_rule = $_POST["id_rule"];
+
+                $rule_m->delete($id_rule);
+                HttpStatusCode::response(204, null); return;
+            }
+
+        }
+
     }
