@@ -7,3 +7,4 @@ RewriteRule ^registro$ /controllers/register_view.php [L]
 
 # Actions
 RewriteRule ^actions/login$ /controllers/actions/login.php [L]
+RewriteRule ^actions/register$ /controllers/actions/register.php [L]

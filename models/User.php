@@ -27,6 +27,20 @@ class User {
         }
     }
 
+    public function create($full_name, $username, $password, $query_limit){
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO users (full_name, user, password, query_limit) VALUES (:full_name, :username, :password, :query_limit)");
+            $stmt->bindParam(':full_name', $full_name);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':query_limit', $query_limit);
+            $user = $stmt->execute();
+            return $user;
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
 }
 
 ?>
