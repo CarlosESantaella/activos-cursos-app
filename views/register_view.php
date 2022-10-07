@@ -80,7 +80,16 @@
                         setTimeout(() => {
                             $('.alert').slideUp();
                         }, 3000);
-                    }else {
+                    }else if(rawResponse.status == 409){
+                        $('.alert').removeClass('alert-primary');
+                        $('.alert').removeClass('alert-danger');
+                        $('.alert').addClass('alert-danger');
+                        $('.alert').text('Usuario registrado, intente con otro nombre de usuario');
+                        $('.alert').slideDown();
+                        setTimeout(() => {
+                            $('.alert').slideUp();
+                        }, 3000);
+                    }else{
                         $('.alert').removeClass('alert-primary');
                         $('.alert').removeClass('alert-danger');
                         $('.alert').addClass('alert-danger');

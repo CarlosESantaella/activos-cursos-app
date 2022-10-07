@@ -95,12 +95,13 @@
     <script>
         $(document).ready( function () {
 
-            const init = async () => {
-                // let formData = new FormData();
-                // formData.append()
+            const search = async (search) => {
+                let formData = new FormData();
+                formData.append('search', search);
 
-                const rawResponse = await fetch('/actions/rules/get_list', {
-                    method: 'GET'
+                const rawResponse = await fetch('/actions/search/', {
+                    method: 'POST',
+                    body: formData
                 });
                 const content = await rawResponse.json();
 
@@ -109,7 +110,7 @@
                     $('#normas tbody').append(`
                         <tr>    
                             <td>${content[key].title}</td>
-                            <td>${content[key].description}</td>
+                            <td>${content[key].description.slice(0, 20)+'...'}</td>
                             <td>
                                 <button class="btn btn-success me-1 btn-see" title="Ver norma" data-id="${content[key].id}" data-bs-toggle="modal" data-bs-target="#verNormaModal">
                                     <i class="fa-solid fa-eye"></i>
@@ -126,25 +127,25 @@
                     "lengthChange": false
                 });
             }
-            
-            init();
 
-            $('.btn-search').on('click', function(){
+            $('#normas').DataTable({
+                    "info": false,
+                    "searching": false,
+                    "lengthChange": false
+                });
+
+            $('.btn-search').on('click', async function(){
                 let value = $('.input-search').val();
 
                 if(value.trim() == ''){
                     $('.input-search').parent().next().text('Este campo es obligatorio');
                 }else{
                     $('.input-search').parent().next().text('');
-                    let formData = new FormData();
-                    formData.append('title', title);
+                    $('#normas').DataTable().destroy();
 
-                    const rawResponse = await fetch('/actions/rules/update', {
-                        method: 'POST',
-                        body: formData
-                    });
+                    search(value);
+                    
 
-                    const content = await rawResponse.json();
 
                     // $('.alert').removeClass('alert-primary');
                     // $('.alert').removeClass('alert-danger');
@@ -202,16 +203,19 @@
                 let formData = new FormData();
                     formData.append('id_rule', rule_id);
 
-                    const rawResponse = await fetch('/actions/rules/get', {
-                        method: 'POST',
-                        body: formData
+                    const rawResponse = await fetch('/actions/rules/get?id='+rule_id, {
+                        method: 'GET'
                     });
 
                     const content = await rawResponse.json();
 
+                    console.log(content);
+
                     $('#verNormaModal .modal-dialog .modal-body').html('');
                     $('#verNormaModal .modal-dialog .modal-body').html(content.description);
-                    $('#verNormaModalLabel').html('Norma: '+content.title);
+
+                    $('#verNormaModalLabel').text('');
+                    $('#verNormaModalLabel').text('Norma: '+content.title);
 
 
 
