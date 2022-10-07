@@ -1,3 +1,7 @@
+:root {
+    --blue-sky: #2699fb;
+    --blue: #016794;
+}
 /* general */
 body{
     background: #f2f3f4;
@@ -14,6 +18,12 @@ body{
     max-width: 900px;
 }
 /* general */
+.text-primary-cursos {
+    color: var(--blue);
+}
+.bg-primary-cursos {
+    background-color: var(--blue-sky);
+}
 /* LOGIN REGISTER */
 .form-login, .form-register{
     width: 95%;

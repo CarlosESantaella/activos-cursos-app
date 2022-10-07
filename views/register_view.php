@@ -13,7 +13,7 @@
     <main>
         <div class="container">
             <form action="" method="post" class="row form-register" id="formRegister">
-                <h3 class="text-center text-primary">Registro</h3>
+                <h3 class="text-center text-primary-cursos">Registro</h3>
                 <div class="col-12 mb-3">
                     <label for="">Nombre</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese Nombre..." name="full_name">

@@ -38,7 +38,7 @@
     </div>
 
     <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
-    <h2 class="text-primary text-center pt-4">Dashboard Cliente</h2>
+    <h2 class="text-primary-cursos text-center pt-4">Dashboard Cliente</h2>
 
 
     <section class="box mb-5">

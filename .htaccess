@@ -12,6 +12,7 @@ RewriteRule ^logout$ /controllers/logout.php [L]
 # -- Auth
 RewriteRule ^actions/auth/login$ /controllers/actions/auth/login.php [L]
 RewriteRule ^actions/auth/register$ /controllers/actions/auth/register.php [L]
+RewriteRule ^actions/auth/logout$ /controllers/actions/auth/logout.php [L]
 
 # -- Rules
 RewriteRule ^actions/rules/get_list$ /controllers/actions/rules/get_list.php [L]

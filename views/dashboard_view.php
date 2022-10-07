@@ -19,13 +19,13 @@
 </head>
 <body>
     <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
-    <h2 class="text-primary text-center pt-4">Dashboard admin</h2>
+    <h2 class="text-primary-cursos text-center pt-4">Dashboard admin</h2>
 
 
     <section class="box mb-5">
         <h3 class="text-center mb-4">Gestión de consultas</h3>
         <form action="" method="post" class="d-flex justify-content-between" style="max-width: 500px; width: 95%; margin: 0 auto;">
-            <input type="text" class="form-control me-3 input-limit input-number" placeholder="Ingrese intentos">
+            <input type="text" value="<?php echo $configurations["user_limit"]; ?>" class="form-control me-3 input-limit input-number" placeholder="Ingrese intentos">
             <button type="button" class="btn btn-primary btn-refresh">Actualizar</button>
         </form>
         <p class="msg-error text-danger text-center"></p>
@@ -152,8 +152,6 @@
                     setTimeout(() => {
                         $('.alert').slideUp();
                     }, 3000);
-
-                    $('.input-limit').val('');
                 }
             })
 
