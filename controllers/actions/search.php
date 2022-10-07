@@ -43,7 +43,9 @@
                 $list = $rule_m->get_list_by_filter($search);
 
                 // Decrease limit
-                $user_m->decrease_limit($user["query_limit"], $user["id"]);
+                if ($user["type"] == "user") {
+                    $user_m->decrease_limit($user["query_limit"], $user["id"]);
+                }
 
                 HttpStatusCode::response(200, $list); return;
             }
