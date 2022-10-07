@@ -51,7 +51,7 @@
             unset($data['password']);
             return JWT::encode($data, CLIENT_SECRET, JWT_ALGORITHM);
         }
-        
+
         public static function decode_access_token($access_token) {
             try {
                 return JWT::decode($access_token, new Key(CLIENT_SECRET, JWT_ALGORITHM));

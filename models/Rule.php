@@ -26,6 +26,35 @@ class Rule {
         }
     }
 
+    public function get_list_by_filter($filter) {
+        try{
+
+            $params = [];
+            $sql = "SELECT * FROM rules WHERE (title LIKE :filter)";
+            $params[] = [":filter", "%$filter%"];
+            if (count(explode(" ", $filter)) > 1) {
+                $sql .= " OR (";
+                foreach (explode(" ", $filter) as $key => $value) {
+                    if ($key != 0) {
+                        $sql .= " OR ";
+                    }
+                    $sql .= "title LIKE :filter$key";
+                    $params[] = [":filter$key", "%$value%"];
+                }
+                $sql .= ")";
+            }
+            $stmt = $this->conn->prepare($sql);
+            foreach ($params as $key => $param) {
+                $stmt->bindParam($param[0], $param[1]);
+            }
+            $stmt->execute();
+            $rules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rules;
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
     public function get_list(){
         try{
             $stmt = $this->conn->prepare("SELECT * FROM rules");

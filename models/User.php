@@ -27,6 +27,18 @@ class User {
         }
     }
 
+    public function decrease_limit($current_query_limit, $user_id) {
+        try{
+            $query_limit = $current_query_limit - 1;
+            $stmt = $this->conn->prepare("UPDATE users SET query_limit = :query_limit WHERE id = :id");
+            $stmt->bindParam(':query_limit', $query_limit);
+            $stmt->bindParam(':id', $user_id);
+            $stmt->execute();
+        }catch(PDOException $e){
+            die('error: '.$e->getMessage().' on '.$e->getLine());
+        }
+    }
+
     public function create($full_name, $username, $password, $query_limit){
         try{
             $stmt = $this->conn->prepare("INSERT INTO users (full_name, user, password, query_limit) VALUES (:full_name, :username, :password, :query_limit)");
