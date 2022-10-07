@@ -16,7 +16,7 @@
         public static function find() {
 
             // Verify permissions
-            if (Auth::has_permission("user") || Auth::has_permission("client")) {
+            if (Auth::has_permission("user-client")) {
                 $rule_m = new Rule;
                 $user_m = new User;
 

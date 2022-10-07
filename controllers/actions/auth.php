@@ -67,8 +67,14 @@
                 $token =  isset($_SERVER["HTTP_AUTHORIZATION"]) ? explode(" ", $access_token)[1] : $access_token;
                 $me = Auth::me($token);
                  if ($me) {
-                    if ($me->type == $permission) {
-                        return True;
+                    if ($permission == "user-client") {
+                        if ($me->type == "user" || $me->type == "client" ) {
+                            return True;
+                        }
+                    }else {
+                        if ($me->type == $permission) {
+                            return True;
+                        }
                     }
                 }
             }
