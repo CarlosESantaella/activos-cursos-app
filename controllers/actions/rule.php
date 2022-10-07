@@ -11,6 +11,18 @@
 
     class Rule {
 
+        public static function get() {
+
+            // Verify permissions
+            if (Auth::has_permission("user-client")) {
+                $rule_m = new RuleModel;
+                $id = $_GET["id"];    
+                $rule = $rule_m->get($id);
+                HttpStatusCode::response(200, $rule); return;
+            }
+
+        }
+
         public static function get_list() {
 
             // Verify permissions

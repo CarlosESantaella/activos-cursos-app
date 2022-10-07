@@ -18,6 +18,7 @@ RewriteRule ^actions/auth/logout$ /controllers/actions/auth/logout.php [L]
 RewriteRule ^actions/search/$ /controllers/actions/search/search.php [L]
 
 # -- Rules
+RewriteRule ^actions/rules/get$ /controllers/actions/rules/get.php [L]
 RewriteRule ^actions/rules/get_list$ /controllers/actions/rules/get_list.php [L]
 RewriteRule ^actions/rules/create$ /controllers/actions/rules/create.php [L]
 RewriteRule ^actions/rules/delete$ /controllers/actions/rules/delete.php [L]
