@@ -32,7 +32,7 @@
 
     </section>
     <section class="box">
-        <h3 class="text-center mb-4">Normas crud</h3>
+        <h3 class="text-center mb-4">Lista de normas</h3>
         <div class="text-end">
             <button class="btn btn-primary btn-create">Agregar</button>
         </div>
@@ -52,7 +52,7 @@
         <h3 class="text-center mb-4 box3-title">Crear</h3>
         <div class="mb-3">
             <label for="">Título</label>
-            <input type="text" placeholder="Ingrese el título.." class="form-control title-rule validate-empty" >
+            <input type="text" id="titulo" placeholder="Ingrese el título.." class="form-control title-rule validate-empty" >
             <p class="msg-error text-danger"></p>
 
         </div>
@@ -76,6 +76,8 @@
     <script>
         $(document).ready( function () {
 
+            var list_rules = [];
+
             const init = async () => {
                 // let formData = new FormData();
                 // formData.append()
@@ -84,7 +86,7 @@
                     method: 'GET'
                 });
                 const content = await rawResponse.json();
-
+                list_rules = content;
                 Object.keys(content).forEach((key) => {
                     console.log(content[key].description);
                     $('#normas tbody').append(`
@@ -92,8 +94,20 @@
                             <td>${content[key].title}</td>
                             <td>${content[key].description}</td>
                             <td>
-                                <button class="btn btn-primary me-1 btn-edit" title="Editar" data-id="${content[key].id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="btn btn-danger btn-delete" title="Eliminar" data-id="${content[key].id}"><i class="fa-solid fa-trash"></i></button>
+                                <button 
+                                    class="btn btn-primary me-1 btn-edit" 
+                                    title="Editar" 
+                                    data-id="${content[key].id}" 
+                                >
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button 
+                                    class="btn btn-danger btn-delete" 
+                                    title="Eliminar" 
+                                    data-id="${content[key].id}"
+                                >
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </td>
 
                         </tr>
@@ -178,13 +192,25 @@
             $('.btn-create').on('click', function(){
                 window.location.href = "/dashboard#box3";
                 $('.box3-title').text('Crear Norma');
+                $("#titulo").val("");
+                $('#description').trumbowyg('html', "");
                 $('.box3').fadeIn();
 
                 $('.box3-btn').attr('data-action', 'create');
             });
+
             $('body').on('click', '.btn-edit', function(){
                 $('.box3-title').text('Editar Norma');
                 let id = $(this).attr('data-id');
+
+                list_rules.forEach(rule => {
+                    if (rule.id == id) {
+                        console.log(rule.title);
+                        console.log(rule.description);
+                        $("#titulo").val(rule.title);
+                        $('#description').trumbowyg('html', rule.description);
+                    }
+                });
 
                 window.location.href = "/dashboard#box3";
                 $('.box3').fadeIn();
@@ -193,6 +219,7 @@
                 $('.box3-btn').attr('data-id', id);
 
             });
+
             $('body').on('click', '.btn-delete', async function(){
                 let id = $(this).attr('data-id');
                 let formData = new FormData();
@@ -216,6 +243,7 @@
                 $('#normas tbody').html('');
                 init();
             })
+
             $('body').on('click', '.box3-btn', async function(){
                 let action = $(this).attr('data-action');
                 let id = $(this).attr('data-id');
@@ -245,8 +273,6 @@
                 if(!flag_empty){
 
                     if(action == 'create'){
-    
-
     
                         let formData = new FormData();
                         formData.append('title', title);
