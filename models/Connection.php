@@ -9,7 +9,7 @@ class Connect{
 
     public static function connection(){
         try{
-            $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
+            $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']."/app");
             $dotenv->load();
             $connection = new PDO("mysql:host={$_ENV['DB_SERVER']};dbname={$_ENV['DB_NAME']};charset=utf8", "{$_ENV['DB_USER']}", "{$_ENV['DB_PASS']}");
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

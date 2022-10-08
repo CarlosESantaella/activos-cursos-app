@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/app/assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="/assets/css/trumbowyg.css" rel="stylesheet">
+    <link href="/app/assets/css/trumbowyg.css" rel="stylesheet">
     <style>
         .box-d-none{
             display: none;
@@ -37,7 +37,7 @@
     </div>
     </div>
 
-    <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'].'/app/views/partials/nav.php'); ?>
     <h2 class="text-primary-cursos text-center pt-4">Dashboard Cliente</h2>
 
 
@@ -93,7 +93,7 @@
     <!-- <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
 
-    <script src="/assets/js/trumbowyg.min.js"></script>
+    <script src="/app/assets/js/trumbowyg.min.js"></script>
 
 
     <script>
@@ -108,7 +108,7 @@
                 let formData = new FormData();
                 formData.append('search', search);
 
-                const rawResponse = await fetch('/actions/search/', {
+                const rawResponse = await fetch('/app/actions/search/', {
                     method: 'POST',
                     body: formData
                 });
@@ -220,7 +220,7 @@
                 let formData = new FormData();
                     formData.append('id_rule', rule_id);
 
-                    const rawResponse = await fetch('/actions/rules/get?id='+rule_id, {
+                    const rawResponse = await fetch('/app/actions/rules/get?id='+rule_id, {
                         method: 'GET'
                     });
 
@@ -283,7 +283,7 @@
                         formData.append('title', title);
                         formData.append('description', description);
     
-                        const rawResponse = await fetch('/actions/rules/create', {
+                        const rawResponse = await fetch('/app/actions/rules/create', {
                             method: 'POST',
                             body: formData
                         });
@@ -314,7 +314,7 @@
                         formData.append('description', description);
                         formData.append('id_rule', id);
     
-                        const rawResponse = await fetch('/actions/rules/update', {
+                        const rawResponse = await fetch('/app/actions/rules/update', {
                             method: 'POST',
                             body: formData
                         });

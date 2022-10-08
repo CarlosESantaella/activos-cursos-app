@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/app/assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="/assets/css/trumbowyg.css" rel="stylesheet">
+    <link href="/app/assets/css/trumbowyg.css" rel="stylesheet">
 
  
     <style>
@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'].'/app/views/partials/nav.php'); ?>
     <h2 class="text-primary-cursos text-center pt-4">Dashboard admin</h2>
 
 
@@ -37,7 +37,7 @@
     <section class="box">
         <h3 class="text-center mb-4">Lista de normas</h3>
         <div class="text-end">
-            <button class="btn btn-primary btn-create">Agregar</button>
+            <button class="btn btn-primary btn-create" type="button">Agregar</button>
         </div>
         <div class="table-responsive">
 
@@ -78,7 +78,7 @@
     <!-- <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
 
-    <script src="/assets/js/trumbowyg.min.js"></script>
+    <script src="/app/assets/js/trumbowyg.min.js"></script>
 
 
     <script>
@@ -90,7 +90,7 @@
                 // let formData = new FormData();
                 // formData.append()
 
-                const rawResponse = await fetch('/actions/rules/get_list', {
+                const rawResponse = await fetch('/app/actions/rules/get_list', {
                     method: 'GET'
                 });
                 const content = await rawResponse.json();
@@ -146,7 +146,7 @@
                     let formData = new FormData();
                     formData.append('limit_user', value);
 
-                    const rawResponse = await fetch('/actions/configuration/update', {
+                    const rawResponse = await fetch('/app/actions/configuration/update', {
                         method: 'POST',
                         body: formData
                     });
@@ -165,7 +165,7 @@
             })
 
             $('#description').trumbowyg({
-                svgPath: '/assets/css/icons.svg',
+                svgPath: '/app/assets/css/icons.svg',
                 btnsDef: {
                     underline: {
                         fn: 'underline',
@@ -197,7 +197,7 @@
             });
 
             $('.btn-create').on('click', function(){
-                window.location.href = "/dashboard#box3";
+                window.location.href = "#box3";
                 $('.box3-title').text('Crear Norma');
                 $("#titulo").val("");
                 $('#description').trumbowyg('html', "");
@@ -219,7 +219,7 @@
                     }
                 });
 
-                window.location.href = "/dashboard#box3";
+                window.location.href = "#box3";
                 $('.box3').fadeIn();
 
                 $('.box3-btn').attr('data-action', 'edit');
@@ -232,7 +232,7 @@
                 let formData = new FormData();
                 formData.append('id_rule', id);
 
-                const rawResponse = await fetch('/actions/rules/delete', {
+                const rawResponse = await fetch('/app/actions/rules/delete', {
                     method: 'POST',
                     body: formData
                 });
@@ -285,7 +285,7 @@
                         formData.append('title', title);
                         formData.append('description', description);
     
-                        const rawResponse = await fetch('/actions/rules/create', {
+                        const rawResponse = await fetch('/app/actions/rules/create', {
                             method: 'POST',
                             body: formData
                         });
@@ -308,7 +308,7 @@
                         $('#normas tbody').html('');
                         init();
 
-                        window.location.href = "/dashboard#normas";
+                        window.location.href = "#normas";
     
                     }else if(action == 'edit'){
                         let formData = new FormData();
@@ -316,7 +316,7 @@
                         formData.append('description', description);
                         formData.append('id_rule', id);
     
-                        const rawResponse = await fetch('/actions/rules/update', {
+                        const rawResponse = await fetch('/app/actions/rules/update', {
                             method: 'POST',
                             body: formData
                         });
@@ -339,7 +339,7 @@
                         $('#normas tbody').html('');
                         init();
 
-                        window.location.href = "/dashboard#normas";
+                        window.location.href = "#normas";
                     }
                 }
 

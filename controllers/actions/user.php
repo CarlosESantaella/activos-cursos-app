@@ -1,9 +1,9 @@
 <?php
     namespace Controller;
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/models/User.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/models/Configuration.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//models/User.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/httpstatuscode.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//models/Configuration.php');
 
     use Model\User as UserModel;
     use Model\Configuration;

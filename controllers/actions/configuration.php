@@ -1,9 +1,9 @@
 <?php
     namespace Controller;
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/models/Configuration.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/auth.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//models/Configuration.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/auth.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/httpstatuscode.php');
 
     use Model\Configuration as ConfigurationModel;
     use Controller\Auth;

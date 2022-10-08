@@ -10,7 +10,7 @@ class Configuration {
     private $conn;
 
     public function __construct(){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/models/Connection.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'/app/models/Connection.php');
         $this->conn = Connect::connection();
     }
 

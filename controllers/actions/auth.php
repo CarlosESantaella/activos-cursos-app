@@ -1,9 +1,9 @@
 <?php
     namespace Controller;
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/models/User.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//models/User.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/httpstatuscode.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//config/config.php');
 
     use \Firebase\JWT\JWT;
     use \Firebase\JWT\Key;
@@ -36,7 +36,7 @@
 
         public static function logout() {
             setcookie("access_token", false, -1, '/');
-            header('location: /login');
+            header('location: /app/login');
         }
 
         public static function me($access_token) {

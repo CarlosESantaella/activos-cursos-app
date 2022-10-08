@@ -1,9 +1,9 @@
 <?php
     namespace Controller;
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/models/Rule.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/auth.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/controllers/actions/httpstatuscode.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//models/Rule.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/auth.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/app//controllers/actions/httpstatuscode.php');
 
     use Model\Rule as RuleModel;
     use Controller\Auth;
