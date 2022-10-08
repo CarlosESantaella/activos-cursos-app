@@ -31,11 +31,11 @@
                     HttpStatusCode::raiseException(401, "User exceeded query limit"); return;
                 }
 
-                //$user["created_at"]
-                $today = new \DateTime();
-                $expires = new \DateTime($user["expires_at"]);
-                $interval = $today->diff($expires);
-                if (intval($interval->format("%r%a")) <= 0) {
+                $today = time();
+                $expires = strtotime($user["expires_at"]);
+                $datediff = $today - $expires;
+                $diff = round($datediff / (60 * 60 * 24));
+                if ($diff >= 0) {
                     HttpStatusCode::raiseException(401, "User trial time expired"); return;
                 }
 
