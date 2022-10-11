@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasboard</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/app/assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -43,9 +43,9 @@
 
     <section class="box mb-5">
         <h4 class="text-center mb-2">Buscar norma</h4>
-        <form action="" method="post" class="d-flex justify-content-between " style="max-width: 500px; width: 95%; margin: 0 auto;">
+        <form action="#" id="form-norma" method="post" class="d-flex justify-content-between" style="max-width: 500px; width: 95%; margin: 0 auto;">
             <input type="text" class="form-control me-3 input-search" placeholder="Ingrese en la norma...">
-            <button type="button" class="btn btn-primary btn-search">Buscar</button>
+            <button type="submit" class="btn btn-primary btn-search">Buscar</button>
         </form>
         <p class="msg-error text-danger text-center"></p>
 
@@ -105,6 +105,7 @@
             }
 
             const search = async (search) => {
+                $('#normas tbody').html("");
                 let formData = new FormData();
                 formData.append('search', search);
 
@@ -151,7 +152,8 @@
 
                 });
 
-            $('.btn-search').on('click', async function(){
+            $('#form-norma').on('submit', async function(e){
+                e.preventDefault();
                 let value = $('.input-search').val();
 
                 if(value.trim() == ''){
