@@ -1,3 +1,7 @@
+/* general */
+*{
+    user-select: none !important;
+}
 :root {
     --blue-sky: #2699fb;
     --blue: #016794;
