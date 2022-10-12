@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body>
+<body  onselectstart='return false'>
     <!-- Ver Norma Modal -->
     <div class="modal fade" id="verNormaModal" tabindex="-1" aria-labelledby="verNormaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

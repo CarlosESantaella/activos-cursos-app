@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body>
+<body   >
     <?php include($_SERVER['DOCUMENT_ROOT'].'/views/partials/nav.php'); ?>
     <h2 class="text-primary-cursos text-center pt-4">Dashboard admin</h2>
 
