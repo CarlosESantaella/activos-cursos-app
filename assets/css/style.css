@@ -51,3 +51,7 @@ body{
     z-index: 99999999999999999999999999999999;
 }
 /* LOGIN REGISTER*/
+body .mutiple-select.slim {
+    height: auto !important;
+    padding: 10px 15px !important;
+}

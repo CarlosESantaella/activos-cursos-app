@@ -66,11 +66,12 @@ class Rule {
         }
     }
 
-    public function create($title, $description){
+    public function create($title, $description, $related_rules){
         try{
-            $stmt = $this->conn->prepare("INSERT INTO rules (title, description) VALUES (:title, :description)");
+            $stmt = $this->conn->prepare("INSERT INTO rules (title, description, related_rules) VALUES (:title, :description, :related_rules)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':related_rules', $related_rules);
             $stmt->execute();
         }catch(PDOException $e){
             die('error: '.$e->getMessage().' on '.$e->getLine());

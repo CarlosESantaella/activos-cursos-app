@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasboard</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/app/assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/app/assets/css/trumbowyg.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/app/assets/css/multiPick.css">
  
     <style>
         .box-d-none{
@@ -62,6 +62,11 @@
             <p class="msg-error text-danger"></p>
 
         </div>
+        <label for="">Normas relacionadas</label>
+        <div class="mb-3">
+            <select id="multiPick" name="related_rules"></select>
+        </div>
+
         <div id="description" class="validate-empty"></div>
         <p class="msg-error text-danger"></p>
 
@@ -80,6 +85,7 @@
 
     <script src="/app/assets/js/trumbowyg.min.js"></script>
 
+    <script src="/app/assets/js/multiPick.js"></script>
 
     <script>
         $(document).ready( function () {
@@ -202,11 +208,28 @@
                 ]
             });
 
-            $('.btn-create').on('click', function(){
+            $('.btn-create').on('click', async function(){
                 window.location.href = "#box3";
                 $('.box3-title').text('Crear Norma');
                 $("#titulo").val("");
                 $('#description').trumbowyg('html', "");
+
+                const rawResponse = await fetch('/app/actions/rules/get_list');
+                const content = await rawResponse.json();
+                let norma_content = '';
+                content.forEach(norma => {
+                    norma_content += "<option value='" + norma.id + "'>" + norma.title + "</option>";
+                });
+                $("#multiPick").html(norma_content);
+                $('#multiPick').multiPick({
+                    limit: 20,
+                    image: false,
+                    closeAfterSelect: true,
+                    search: true,
+                    placeholder: 'Seleccione las normas relacionadas',
+                    slim: true
+                });
+
                 $('.box3').fadeIn();
 
                 $('.box3-btn').attr('data-action', 'create');
@@ -263,7 +286,7 @@
 
                 let title = $('.title-rule').val();
                 let description = $('#description').html();
-
+                let related_rules = $('#multiPick').getMultiPick();
                 
                 let flag_empty = false;
                 
@@ -290,6 +313,7 @@
                         let formData = new FormData();
                         formData.append('title', title);
                         formData.append('description', description);
+                        formData.append('related_rules', related_rules);
     
                         const rawResponse = await fetch('/app/actions/rules/create', {
                             method: 'POST',

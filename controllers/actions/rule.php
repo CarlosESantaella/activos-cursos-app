@@ -23,13 +23,17 @@
 
         }
 
-        public static function get_list() {
+        public static function get_list($json=false) {
 
             // Verify permissions
             if (Auth::has_permission("admin")) {
                 $rule_m = new RuleModel;    
                 $list = $rule_m->get_list();
-                HttpStatusCode::response(200, $list); return;
+                if ($json) {
+                    return $list;
+                }else {
+                    HttpStatusCode::response(200, $list); return;
+                }
             }
 
         }
@@ -41,7 +45,8 @@
                 $rule_m = new RuleModel;
                 $title = $_POST["title"];
                 $description = $_POST["description"];
-                $rule_m->create($title, $description);
+                $related_rules = $_POST["related_rules"];
+                $rule_m->create($title, $description, $related_rules);
                 HttpStatusCode::response(201, null); return;
             }
 

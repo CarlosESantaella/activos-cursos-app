@@ -59,7 +59,8 @@ DROP TABLE IF EXISTS `rules`;
 CREATE TABLE `rules` (
   `id` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `related_rules` varchar(200)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
