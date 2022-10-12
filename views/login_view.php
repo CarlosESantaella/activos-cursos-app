@@ -15,7 +15,7 @@
             <form action="" method="post" class="row form-login" id="formLogin">
                 <h3 class="text-center text-primary-cursos">Login</h3>
                 <div class="col-12 mb-3">
-                    <label for="">Usuario grissy</label>
+                    <label for="">Usuario</label>
                     <input type="text" class="form-control validate-empty" placeholder="Ingrese usuario..." name="username">
                     <p class="msg-error text-danger"></p>
                 </div>
