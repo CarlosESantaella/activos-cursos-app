@@ -60,10 +60,15 @@
                 $id_rule = $_POST["id_rule"];
                 $title = $_POST["title"];
                 $description = $_POST["description"];
+                $related_rules = isset($_POST["related_rules"]) ? $_POST["related_rules"]: false;
                 if (!$rule_m->get($id_rule)) {
                     HttpStatusCode::raiseException(404, "Rule not found"); return;
                 }else {
-                    $rule_m->update($title, $description, $id_rule);
+                    if (!$related_rules) {
+                        $rule_temp = $rule_m->get($id_rule);
+                        $related_rules = $rule_temp["related_rules"];
+                    }
+                    $rule_m->update($title, $description, $related_rules, $id_rule);
                     HttpStatusCode::response(201, null); return;
                 }
 

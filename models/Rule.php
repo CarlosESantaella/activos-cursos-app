@@ -78,11 +78,12 @@ class Rule {
         }
     }
 
-    public function update($title, $description, $id_rule){
+    public function update($title, $description, $related_rules, $id_rule){
         try{
-            $stmt = $this->conn->prepare("UPDATE rules SET title = :title, description = :description WHERE id = :id");
+            $stmt = $this->conn->prepare("UPDATE rules SET title = :title, description = :description, related_rules = :related_rules WHERE id = :id");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':related_rules', $related_rules);
             $stmt->bindParam(':id', $id_rule);
             $stmt->execute();
         }catch(PDOException $e){

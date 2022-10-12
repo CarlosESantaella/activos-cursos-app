@@ -62,7 +62,7 @@
             <p class="msg-error text-danger"></p>
 
         </div>
-        <label for="">Normas relacionadas</label>
+        <label for="">Normas relacionadas</label><br>
         <div class="mb-3">
             <select id="multiPick" name="related_rules"></select>
         </div>
@@ -108,7 +108,6 @@
                 const content = await rawResponse.json();
                 list_rules = content;
                 Object.keys(content).forEach((key) => {
-                    console.log(content[key].description);
                     $('#normas tbody').append(`
                         <tr>    
                             <td>${content[key].title}</td>
@@ -239,11 +238,53 @@
                 $('.box3-title').text('Editar Norma');
                 let id = $(this).attr('data-id');
 
-                list_rules.forEach(rule => {
+                list_rules.forEach(async rule => {
                     if (rule.id == id) {
-                        console.log(rule.title);
-                        console.log(rule.description);
                         $("#titulo").val(rule.title);
+                        const rawResponse = await fetch('/app/actions/rules/get_list');
+                        const content = await rawResponse.json();
+                        let norma_content = '';
+                        let selectedItems = "";
+                        const related_rules = rule.related_rules.split(",");
+                        content.forEach(norma => {
+                            norma_content += "<option value='" + norma.id + "'>" + norma.title + "</option>";
+                            if (related_rules.includes(norma.id.toString())) {
+                                selectedItems += `<div class="item" data-value="${norma.id}">
+                                                        ${norma.title}
+                                                        <button type="button" class="btn-remove">
+                                                            <!--?xml version="1.0" encoding="utf-8"?-->
+                                                            <!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                            <svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+                                                            <style type="text/css">
+                                                                .st0{fill:#FFFFFF;}
+                                                            </style>
+                                                            <g>
+                                                                <path class="st0" d="M19.2,0.8L19.2,0.8c-0.63-0.63-1.66-0.63-2.3,0L10,7.7L3.1,0.8c-0.63-0.63-1.66-0.63-2.3,0l0,0
+                                                                    c-0.63,0.63-0.63,1.66,0,2.3L7.7,10l-6.9,6.9c-0.63,0.63-0.63,1.66,0,2.3l0,0c0.63,0.63,1.66,0.63,2.3,0l6.9-6.9l6.9,6.9
+                                                                    c0.63,0.63,1.66,0.63,2.3,0l0,0c0.63-0.63,0.63-1.66,0-2.3L12.3,10l6.9-6.9C19.83,2.47,19.83,1.44,19.2,0.8z"></path>
+                                                            </g>
+                                                            </svg>
+                                                        </button>
+                                                    </div>`;
+                            }
+                        });
+                        $("#multiPick").html(norma_content);
+                        $('#multiPick').multiPick({
+                            limit: 20,
+                            image: false,
+                            closeAfterSelect: true,
+                            search: true,
+                            placeholder: 'Seleccione las normas relacionadas',
+                            slim: true
+                        });
+                        if (selectedItems != '') {
+                            $(".main-content > span").css({ display: "none" });
+                            $(".main-content .selected-itens").html(selectedItems);
+                            $(`#multiPick`).find(`.btn-remove`).click(function (e) {
+                                e.stopPropagation();
+                                $(this).parent().remove();
+                            });
+                        }
                         $('#description').trumbowyg('html', rule.description);
                     }
                 });
@@ -289,7 +330,7 @@
                 let related_rules = $('#multiPick').getMultiPick();
                 
                 let flag_empty = false;
-                
+
                 if(title.trim() == ''){
                     $('.title-rule').next().text('Este campo es obligatorio');
                     flag_empty = true;
@@ -302,7 +343,6 @@
                     flag_empty = true;
                 }else{
                     $('#description').parent().next().text('');
-
                 }
                 
 
@@ -333,6 +373,7 @@
 
                         $('.title-rule').val('');
                         $('#description').html('');
+                        $("#multiPick").html('');
 
                         $('#normas').DataTable().destroy();
                         $('#normas tbody').html('');
@@ -344,6 +385,7 @@
                         let formData = new FormData();
                         formData.append('title', title);
                         formData.append('description', description);
+                        formData.append('related_rules', related_rules);
                         formData.append('id_rule', id);
     
                         const rawResponse = await fetch('/app/actions/rules/update', {
@@ -364,6 +406,7 @@
 
                         $('.title-rule').val('');
                         $('#description').html('');
+                        $("#multiPick").html('');
 
                         $('#normas').DataTable().destroy();
                         $('#normas tbody').html('');

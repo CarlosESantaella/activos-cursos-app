@@ -10,6 +10,7 @@
     if (isset($_COOKIE["access_token"])) {
         $user_global = Auth::me($_COOKIE["access_token"]);
         if (!$user_global) header("location:/app/login");
+        if ($user_global->type == "admin") header("location:/app/dashboard");
     }else {
         header("location:/app/login");
     }
