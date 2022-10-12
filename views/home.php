@@ -61,7 +61,7 @@
                     <tr>
                         <td>Normas</td>
                         <td>Descripción</td>
-                        <td style="max-width: 100px;">acciones</td>
+                        <td style="max-width: 100px;">Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,7 +123,7 @@
                         $('#normas tbody').append(`
                             <tr>    
                                 <td>${content[key].title}</td>
-                                <td>${content[key].description.slice(0, 20)+'...'}</td>
+                                <td>${stripHtml(content[key].description).slice(0, 30)+'...'}</td>
                                 <td>
                                     <button class="btn btn-success me-1 btn-see" title="Ver norma" data-id="${content[key].id}" data-bs-toggle="modal" data-bs-target="#verNormaModal">
                                         <i class="fa-solid fa-eye"></i>
@@ -251,6 +251,13 @@
             //     $('.box3-btn').attr('data-id', id);
 
             // });
+
+            function stripHtml(html) {
+                let tmp = document.createElement("DIV");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText || "";
+            }
+
             $('body').on('click', '.box3-btn', async function(){
                 let action = $(this).attr('data-action');
                 let id = $(this).attr('data-id');

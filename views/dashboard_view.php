@@ -46,7 +46,7 @@
                     <tr>
                         <td>Normas</td>
                         <td>Descripción</td>
-                        <td style="max-width: 100px;">acciones</td>
+                        <td style="max-width: 100px;">Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +86,12 @@
 
             var list_rules = [];
 
+            function stripHtml(html) {
+                let tmp = document.createElement("DIV");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText || "";
+            }
+
             const init = async () => {
                 // let formData = new FormData();
                 // formData.append()
@@ -100,7 +106,7 @@
                     $('#normas tbody').append(`
                         <tr>    
                             <td>${content[key].title}</td>
-                            <td>${content[key].description}</td>
+                            <td>${stripHtml(content[key].description).slice(0, 30) + "..."}</td>
                             <td>
                                 <button 
                                     class="btn btn-primary me-1 btn-edit" 
