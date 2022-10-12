@@ -36,8 +36,8 @@ CREATE TABLE `users` (
   `user` varchar(60) NOT NULL,
   `password` varchar(60) NOT NULL,
   `query_limit` int NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT NOW(),
-  `expires_at` datetime NOT NULL DEFAULT (NOW() + INTERVAL 3 MONTH)
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expires_at` TIMESTAMP NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

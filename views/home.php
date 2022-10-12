@@ -99,6 +99,11 @@
     <script>
         $(document).ready( function () {
 
+            const messages = {
+                "User trial time expired": "Tu cuenta ha expirado, consulta tu estado con el administrador.",
+                "User exceeded query limit": "Tu cuenta ha excedido el limite de consultas, contacta con el administrador."
+            }
+
             const search = async (search) => {
                 let formData = new FormData();
                 formData.append('search', search);
@@ -109,28 +114,33 @@
                 });
                 const content = await rawResponse.json();
 
-                Object.keys(content).forEach((key) => {
-                    console.log(content[key].description);
-                    $('#normas tbody').append(`
-                        <tr>    
-                            <td>${content[key].title}</td>
-                            <td>${content[key].description.slice(0, 20)+'...'}</td>
-                            <td>
-                                <button class="btn btn-success me-1 btn-see" title="Ver norma" data-id="${content[key].id}" data-bs-toggle="modal" data-bs-target="#verNormaModal">
-                                    <i class="fa-solid fa-eye"></i>
-                                </button>
-                                
-                            </td>
+                if (rawResponse.status == 401) {
+                    $(".msg-error").text(messages[content.details]);
+                }else {
+                    Object.keys(content).forEach((key) => {
+                        console.log(content[key].description);
+                        $('#normas tbody').append(`
+                            <tr>    
+                                <td>${content[key].title}</td>
+                                <td>${content[key].description.slice(0, 20)+'...'}</td>
+                                <td>
+                                    <button class="btn btn-success me-1 btn-see" title="Ver norma" data-id="${content[key].id}" data-bs-toggle="modal" data-bs-target="#verNormaModal">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    
+                                </td>
+    
+                            </tr>
+                        `);
+                    })
+                    $('#normas').DataTable({
+                        "info": false,
+                        "searching": false,
+                        "lengthChange": false,
+                        "responsive": true
+                    });
+                }
 
-                        </tr>
-                    `);
-                })
-                $('#normas').DataTable({
-                    "info": false,
-                    "searching": false,
-                    "lengthChange": false,
-                    "responsive": true
-                });
             }
 
             $('#normas').DataTable({
@@ -268,8 +278,6 @@
                 if(!flag_empty){
 
                     if(action == 'create'){
-    
-
     
                         let formData = new FormData();
                         formData.append('title', title);
