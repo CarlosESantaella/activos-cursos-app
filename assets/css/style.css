@@ -1,8 +1,11 @@
+/* general */
+*{
+    user-select: none !important;
+}
 :root {
     --blue-sky: #2699fb;
     --blue: #016794;
 }
-/* general */
 body{
     background: #f2f3f4;
     padding-bottom: 3rem;
