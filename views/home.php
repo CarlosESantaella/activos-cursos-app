@@ -26,7 +26,7 @@
             <h1 class="modal-title fs-5" id="verNormaModalLabel">Norma</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body ">
+        <div class="modal-body">
             
         </div>
         <div class="modal-footer">
@@ -119,7 +119,6 @@
                     $(".msg-error").text(messages[content.details]);
                 }else {
                     Object.keys(content).forEach((key) => {
-                        console.log(content[key].description);
                         $('#normas tbody').append(`
                             <tr>    
                                 <td>${content[key].title}</td>
@@ -228,10 +227,19 @@
 
                     const content = await rawResponse.json();
 
-                    console.log(content);
+                    let htmlContent = content.description;
+                    console.log(content.related_rules);
+                    if (Object.keys(content.related_rules).length > 0) {
+                        htmlContent += "<br><br><p><b>Normas relacionadas:</b></p>";
+                        for (var key in content.related_rules){
+                            if (content.related_rules[key]) {
+                                htmlContent += "<a target='_blank' href='rule?id=" + key + "'>" + content.related_rules[key] + "</a><br>";
+                            }
+                        }
+                    }
 
                     $('#verNormaModal .modal-dialog .modal-body').html('');
-                    $('#verNormaModal .modal-dialog .modal-body').html(content.description);
+                    $('#verNormaModal .modal-dialog .modal-body').html(htmlContent);
 
                     $('#verNormaModalLabel').text('');
                     $('#verNormaModalLabel').text('Norma: '+content.title);

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark bg-primary-cursos">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/app">
       <img src="/app/assets/img/logo-cursos.png" alt="Logo" style="width: 100px">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

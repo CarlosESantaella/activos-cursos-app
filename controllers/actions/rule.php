@@ -18,6 +18,14 @@
                 $rule_m = new RuleModel;
                 $id = $_GET["id"];    
                 $rule = $rule_m->get($id);
+                $related_rules = explode(",", $rule["related_rules"]);
+                $rule["related_rules"] = [];
+                foreach ($related_rules as $key => $rule_id) {
+                    if ($rule_id != "") {
+                        $rule_temp = $rule_m->get($rule_id);
+                        $rule["related_rules"][$rule_id] = $rule_temp["title"];
+                    }
+                }   
                 HttpStatusCode::response(200, $rule); return;
             }
 

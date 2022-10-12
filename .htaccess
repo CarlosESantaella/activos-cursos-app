@@ -6,6 +6,7 @@ RewriteRule ^login$ /app/controllers/login_view.php [L]
 RewriteRule ^registro$ /app/controllers/register_view.php [L]
 RewriteRule ^dashboard$ /app/controllers/dashboard_view.php [L]
 RewriteRule ^logout$ /app/controllers/logout.php [L]
+RewriteRule ^rule$ /app/controllers/rule_view.php [L]
 
 # Actions
 
