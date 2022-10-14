@@ -11,6 +11,11 @@
 
     class User {
 
+        public static function get_user_by_username($username) {
+            $user = new UserModel;
+            return $user->get_user_by_username($username);
+        }
+
         public static function create() {
             $user = new UserModel;
             $configuration = new Configuration;
