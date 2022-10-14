@@ -251,7 +251,7 @@
                             if (related_rules.includes(norma.id.toString())) {
                                 selectedItems += `<div class="item" data-value="${norma.id}">
                                                         ${norma.title}
-                                                        <button type="button" class="btn-remove">
+                                                        <button type="button" class="btn-remove" title="Eliminar relación">
                                                             <!--?xml version="1.0" encoding="utf-8"?-->
                                                             <!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                                                             <svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">

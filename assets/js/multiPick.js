@@ -120,7 +120,7 @@ $.fn.extend({
                     $(`#${id}`).find(`.selected-itens`).append(`<div class="item" data-value="${value}">
                                                             ${imageblock}
                                                             ${text}
-                                                            <button type="button" class="btn-remove">
+                                                            <button type="button" class="btn-remove" title="Eliminar relación">
 
                                                                 <?xml version="1.0" encoding="utf-8"?>
                                                                 <!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->

@@ -55,3 +55,7 @@ body .mutiple-select.slim {
     height: auto !important;
     padding: 10px 15px !important;
 }
+body .mutiple-select .main-content .selected-itens .item .btn-remove {
+    width: 20px !important;
+    margin-left: 10px !important;
+}
