@@ -14,11 +14,9 @@
         public static function get_setups() {
 
             // Verify permissions
-            if (Auth::has_permission("admin")) {
-                $configuration_m = new ConfigurationModel;
-                $configurations = $configuration_m->get_setups();
-                return $configurations;
-            }
+            $configuration_m = new ConfigurationModel;
+            $configurations = $configuration_m->get_setups();
+            return $configurations;
 
         }
 

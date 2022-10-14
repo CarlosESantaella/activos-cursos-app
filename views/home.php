@@ -40,7 +40,6 @@
     <?php include($_SERVER['DOCUMENT_ROOT'].'/app/views/partials/nav.php'); ?>
     <h2 class="text-primary-cursos text-center pt-4">Dashboard Cliente</h2>
 
-
     <section class="box mb-5">
         <h4 class="text-center mb-2">Buscar norma</h4>
         <form action="#" id="form-norma" method="post" class="d-flex justify-content-between" style="max-width: 500px; width: 95%; margin: 0 auto;">
@@ -48,8 +47,8 @@
             <button type="submit" class="btn btn-primary btn-search">Buscar</button>
         </form>
         <p class="msg-error text-danger text-center"></p>
-
     </section>
+    <p class="mt-2 text-center <?php if($user_global->type != 'user') {echo 'd-none';} ?>">Limite de consultas <span id="query_limit"><?=$user_global->query_limit?></span>/<?= $configurations["user_limit"] ?></parent>
     <section class="box">
         <h3 class="text-center mb-4">Normas</h3>
         <!-- <div class="text-end">
@@ -139,6 +138,9 @@
                         "lengthChange": false,
                         "responsive": true
                     });
+                    let query_limit = $("#query_limit").text();
+                    query_limit = parseInt(query_limit) - 1;
+                    $("#query_limit").text(query_limit);
                 }
 
             }
