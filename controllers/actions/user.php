@@ -23,13 +23,16 @@
             $full_name = $_POST["full_name"];
             $username = $_POST["username"];
             $password = $_POST["password"];
+            $email = $_POST["email"];
+            $phone = $_POST["phone"];
+            $limit_query = $_POST["limit_query"];
+            $expires_at = $_POST["expires_at"];
 
             $user_found = $user->get_user_by_username($username);
             if ($user_found) {
                 HttpStatusCode::raiseException(409, "Username already registered"); return;
             }
-            $conf = $configuration->get_setups();
-            $user->create($full_name, $username, $password, $conf["user_limit"]);
+            $user->create($full_name, $username, $password, $limit_query, $email, $phone, $expires_at);
             HttpStatusCode::response(201, null); return;
         }
 

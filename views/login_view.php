@@ -28,9 +28,6 @@
                 <div class="col-12 text-center mb-3">
                     <button type="button" class="btn btn-primary btn-submit">Acceder</button>
                 </div>
-                <div class="col-12 text-center">
-                    <a href="/app/registro">¿No tienes cuenta?</a>
-                </div>
             </form>
         </div>
     </main>

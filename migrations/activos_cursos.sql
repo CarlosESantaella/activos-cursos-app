@@ -34,6 +34,8 @@ CREATE TABLE `users` (
   `type` enum('admin','user', 'client') DEFAULT 'user',
   `full_name` varchar(60) NOT NULL,
   `user` varchar(60) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `phone` varchar(60) NOT NULL,
   `password` varchar(60) NOT NULL,
   `query_limit` int NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

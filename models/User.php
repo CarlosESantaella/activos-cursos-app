@@ -39,14 +39,16 @@ class User {
         }
     }
 
-    public function create($full_name, $username, $password, $query_limit){
+    public function create($full_name, $username, $password, $query_limit, $email, $phone, $expires_at){
         try{
-            $stmt = $this->conn->prepare("INSERT INTO users (full_name, user, password, query_limit, expires_at) VALUES (:full_name, :username, :password, :query_limit, :expires_at)");
+            $stmt = $this->conn->prepare("INSERT INTO users (full_name, user, password, query_limit, email, phone, expires_at) VALUES (:full_name, :username, :password, :query_limit, :email, :phone, :expires_at)");
             $stmt->bindParam(':full_name', $full_name);
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':query_limit', $query_limit);
-            $expires_at = date('Y-m-d H:i:s', strtotime("+3 months", strtotime(date('Y-m-d H:i:s'))));
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phone', $phone);
+            //$expires_at = date('Y-m-d H:i:s', strtotime("+3 months", strtotime(date('Y-m-d H:i:s'))));
             $stmt->bindParam(':expires_at', $expires_at);
             $user = $stmt->execute();
             return $user;

@@ -8,9 +8,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li> -->
+        <?php if ($user_global->type == 'admin'){ ?>
+        <li class="nav-item">
+          <a class="nav-link mt-1" aria-current="page" href="/app/dashboard">Consultas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mt-1" aria-current="page" href="/app/registro">Crear usuario</a>
+        </li>
+        <?php } ?>
         <li class="nav-item">
           <a class="nav-link " href="/app/actions/auth/logout">
             <i class="fa-solid fa-right-from-bracket fa-2x"></i>

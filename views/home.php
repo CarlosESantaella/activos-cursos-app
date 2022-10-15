@@ -48,7 +48,7 @@
         </form>
         <p class="msg-error text-danger text-center"></p>
     </section>
-    <p class="mt-2 text-center <?php if($user_global->type != 'user') {echo 'd-none';} ?>">Limite de consultas <span id="query_limit"><?=$query_limit?></span>/<?= $configurations["user_limit"] ?></parent>
+    <p class="mt-2 text-center <?php if($user_global->type != 'user') {echo 'd-none';} ?>">Limite de consultas <span id="query_limit"><?=$query_limit?></span></p>
     <section class="box">
         <h3 class="text-center mb-4">Normas</h3>
         <!-- <div class="text-end">

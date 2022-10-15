@@ -9,7 +9,15 @@
 
     if (isset($_COOKIE["access_token"])) {
         $user_global = Auth::me($_COOKIE["access_token"]);
-        if ($user_global) header("location:/app/");
+        if ($user_global) {
+            if ($user_global->type != 'admin') {
+                header("location:/app/");
+            }
+        }else {
+            header("location:/app/");
+        }
+    }else {
+        header("location:/app/");
     }
 
     include($_SERVER['DOCUMENT_ROOT'].'/app/views/register_view.php');
